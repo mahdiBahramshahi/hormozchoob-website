@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}شرکت صنایع چوبی هرمزچوب{% endblock %}
+
+
+{% block styleing %}
+
+
+
+{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(True) %}
+{% if messages %}
+<div class="row">
+    {% for message in messages %}
+    <div class="card">
+        <div style="background-color: green;" class="section">
+            {{ message[1] }}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endif %}
+{% endwith %}
+
+<form action="{{ url_for('index') }}" style="background-color:burlywood;">
+    <center><img style="width: 390;" src="https://s16.picofile.com/file/8419184784/company_logo.jpeg" alt="هرمزچوب"></center>
+    <center><h1 style="font-size: 40; color: white;">شرکت صنایع چوبی هرمزچوب</h1></center>
+</form> 
+
+
+<form action="{{ url_for('index') }}" style="background-color:burlywood; float: left;">
+    <center><div id="content" style="background-color: rgb(161, 114, 53);">
+    <a href="{{url_for('nemone_kar.index')}}" >
+        <img style="width: 390; height: 300;" src="https://s16.picofile.com/file/8419081718/nemone_kar.jpeg" alt="">
+        <h1> نمونه کار ها<br><br></h1>
+    </a>
+    </div>
+    </center>
+</form>
+
+<form action="{{ url_for('index') }}" style="background-color:burlywood; float: left; ">
+  <center><div id="content" style="background-color: rgb(161, 114, 53);">
+  <a href="{{url_for('register_work.index')}}" >
+      <img style="width: 390;height: 300;" src="https://s17.picofile.com/file/8419454942/sabt_sefaresh.jpeg" alt="">
+      <h1>ثبت سفارش کار<br><br></h1>
+  </a>
+  </div>
+  </center>
+</form>
+
+<form action="{{ url_for('index') }}" style="background-color:burlywood; float: left; ">
+  <center><div id="content" style="background-color: rgb(161, 114, 53);">
+  <a href="{{url_for('khadamati.index')}}" >
+      <img style="width: 390;height: 300;" src="https://s17.picofile.com/file/8419791142/khadamat.jpeg" alt="">
+      <h1>خدماتی<br><br></h1>
+  </a>
+  </div>
+  </center>
+</form>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+<form action="{{url_for('index')}}" style="background-color:rgb(161, 114, 53);float: left;">
+  <img style="width: 1400; height:1;" src="https://s16.picofile.com/file/8419081718/nemone_kar.jpeg" alt=""><br><br>
+  <a style=" color: black; font-size: small;float: right;margin-right: 30px ; color: blue;" href="{{url_for('register_work.index')}}">ثبت سفارش کار</a><br>
+  <a style=" color: black; font-size: small;float: right;margin-right: 30px ; color: blue;" href="{{url_for('nemone_kar.index')}}">نمونه کار ها</a> <br>
+  <a style=" color: black; font-size: small;float: right;margin-right: 30px ; color: blue;" href="{{url_for('nemone_kar.index')}}">گالری تصاویر</a><br>
+<center><p style="color: blue; font-size: small;">کلیه حقوق این وبلاگ متعلق به شرکت هرمزچوب میباشد <br> |طراح سایت = مهدی بهرامشاهی|</p></center>
+<img style="width: 1400; height:1;" src="https://s16.picofile.com/file/8419081718/nemone_kar.jpeg" alt="">
+
+</form>
+
+  <br><br>
+
+{% endblock %}

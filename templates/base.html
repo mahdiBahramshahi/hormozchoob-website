@@ -1,0 +1,257 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="icon" href="https://s16.picofile.com/file/8419184784/company_logo.jpeg" type="image/icon type">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+    <style>
+        {% block styleing %}{% endblock %}
+    </style>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: rgb(153, 88, 14);
+        }
+
+        li {
+            float: left;
+        }
+
+        li a,
+        .dropbtn {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover,
+        .dropdown:hover .dropbtn {
+            background-color: burlywood;
+        }
+
+        li.dropdown {
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgb(161, 114, 53);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+
+
+
+
+
+
+    <style type="text/css">
+        img:hover {
+            -webkit-transform: scale(1.02);
+            -moz-transform: scale(1.02);
+            -o-transform: scale(1.02);
+            transition: 0.3s;
+            box-shadow: 0px 0px 3px gray;
+            -webkit-box-shadow: 0px 0px 30px gray;
+            -moz-box-shadow: 0px 0px 30px gray;
+            opacity: 1;
+        }
+    </style>
+
+
+
+
+
+
+    <style>
+        /* unvisited link */
+        a:link {
+            color: black;
+        }
+
+        /* visited link */
+        a:visited {
+            color: black;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: blue;
+        }
+
+        /* selected link */
+        a:active {
+            color: blue;
+        }
+    </style>
+
+
+
+
+
+
+
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+
+        .overlay {
+            /* Height & width depends on how you want to reveal the overlay (see JS below) */
+            height: 100%;
+            width: 0;
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            background-color: rgb(0, 0, 0);
+            /* Black fallback color */
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Black w/opacity */
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            transition: 0.5s;
+            /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+        }
+
+        /* Position the content inside the overlay */
+        .overlay-content {
+            position: relative;
+            top: 25%;
+            /* 25% from the top */
+            width: 100%;
+            /* 100% width */
+            text-align: center;
+            /* Centered text/links */
+            margin-top: 30px;
+            /* 30px top margin to avoid conflict with the close button on smaller screens */
+        }
+
+        /* The navigation links inside the overlay */
+        .overlay a {
+            padding: 8px;
+            text-decoration: none;
+            font-size: 36px;
+            color: #818181;
+            display: block;
+            /* Display block instead of inline */
+            transition: 0.3s;
+            /* Transition effects on hover (color) */
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .overlay a:hover,
+        .overlay a:focus {
+            color: #f1f1f1;
+        }
+
+        /* Position the close button (top right corner) */
+        .overlay .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 45px;
+            font-size: 60px;
+        }
+
+        /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+        @media screen and (max-height: 450px) {
+            .overlay a {
+                font-size: 20px
+            }
+
+            .overlay .closebtn {
+                font-size: 40px;
+                top: 15px;
+                right: 35px;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body style="background-image: url(https://s16.picofile.com/file/8419074942/choob.jpeg); background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;">
+
+
+
+
+    <ul>
+        <div id="myNav" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="overlay-content">
+              <a href="{{url_for('nemone_kar.index')}}">نمونه کار ها</a>
+              <a href="{{url_for('register_work.index')}}">ثبت سفارش کار</a>
+              <a href="{{url_for('users.login')}}">ورود⇥</a>
+              <a href="{{url_for('users.logout')}}">خروج از حساب⇤</a>
+            </div>
+          </div>
+          
+          
+          <span style="font-size:25px;cursor:pointer;float: left;margin-top: 5;margin-left: 7;" onclick="openNav()">&#9776;کاربری</span>
+          
+          <script>
+          function openNav() {
+            document.getElementById("myNav").style.width = "100%";
+          }
+          
+          function closeNav() {
+            document.getElementById("myNav").style.width = "0%";
+          }
+          </script>
+
+        <li><a href="{{url_for('index')}}">خانه</a></li>
+        <!-- <li><a href="{{url_for('nemone_kar.index')}}">نمونه کارها</a></li> -->
+        <a style="float: right;" href="{{url_for('users.login')}}">
+            <p style="font-size: x-large;float: right;">ورود➲</p>
+        </a>
+        <!-- <a style="float: right;" href="{{url_for('users.logout')}}">
+            <p style="font-size: large;float: right;">خروج</p>
+        </a> -->
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">خدماتی</a>
+            <div class="dropdown-content">
+                <a href="{{url_for('khadamati.khadamat_mdf')}}">mdf خدمات</a>
+                <a href="{{url_for('khadamati.khadamat_choob')}}">خدمات چوب</a>
+            </div>
+        </li>
+    </ul>
+
+
+
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+
+</html>

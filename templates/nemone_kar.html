@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} نمونه کار ها {% endblock %}
+
+{% block styleing %}
+
+
+{% endblock %}
+
+
+{% block content %}
+
+<form action="{{url_for('index')}}" style="background-color:burlywood;">
+  <center><h1>نمونه کارها</h1></center>
+</form>
+
+
+    
+<form action="{{url_for('index')}}" style="background-color:burlywood;float: left;">
+<div >        
+<center><a href="https://s16.picofile.com/file/8419184692/the_wood_desk.jpeg">
+    <img style="width: 390; height: 300;" src="https://s16.picofile.com/file/8419184692/the_wood_desk.jpeg" alt=""><br>
+    میز زاویه دار برج فناوری هرمز</a></center>
+</div>
+</form>
+
+
+<form action="{{url_for('index')}}" style="background-color:burlywood;float: left;">
+<div >        
+<center><a href="https://s17.picofile.com/file/8419184718/the_wood_work.jpeg">
+    <img style="width: 390; height: 300;" src="https://s17.picofile.com/file/8419184718/the_wood_work.jpeg" alt=""><br>
+    سازه چوبی برج فناوری هرمز</a></center>
+</div>
+</form>
+    
+{% endblock %}
+
