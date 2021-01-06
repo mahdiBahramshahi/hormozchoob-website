@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+
+{% block title %} خدمات برش {% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(True) %}
+{% if messages %}
+<div class="row">
+    {% for message in messages %}
+    <div class="card">
+        <div style="background-color: green;" class="section">
+            {{ message[1] }}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endif %}
+{% endwith %}
+
+
+<form action="{{url_for('khadamati.kh_cut')}}" style="background-color:burlywood;">
+    <center><h1>خدمات برش</h1> </center>
+    
+</form>
+
+<form action="{{url_for('khadamati.kh_cut')}}" method="POST" enctype="multipart/form-data" style="background-color:burlywood;">
+    <center><p style="font-size: large;"> لطفا فایل اندازه ها را در اینجا آپلود کنید</p></center><br>
+    {{ form.hidden_tag() }}
+    آپلود فایل :↓  <br><br>{{ form.file }} 
+    <br><br>
+    <input type="submit" value="آپلود فایل">
+</form>
+{% endblock %}
+
+
+

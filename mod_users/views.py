@@ -101,9 +101,10 @@ def upload_file():
         try:
             db.session.add(new_file)
             db.session.commit()
-            form.file.data.save(f'static/uploads/{filename}')
+            form.file.data.save(f'static/uploads/khadamati/cut/{filename}')
             flash('فایل آپلود شد')
         except IntegrityError:
             flash('!فایل آپلود نشد' , 'error')
 
     return render_template('users/upload_file.html' , form=form)
+

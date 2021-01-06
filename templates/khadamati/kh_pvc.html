@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% block title %} pvc خدمات {% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(True) %}
+{% if messages %}
+<div class="row">
+    {% for message in messages %}
+    <div class="card">
+        <div style="background-color: green;" class="section">
+            {{ message[1] }}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endif %}
+{% endwith %}
+
+
+
+<form action="{{url_for('khadamati.kh_pvc')}}" style="background-color:burlywood;">
+    <center><h1>pvc خدمات</h1></center>
+</form>
+
+{% endblock %}
+
