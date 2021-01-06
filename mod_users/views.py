@@ -1,8 +1,13 @@
 from flask import request , render_template , flash , session , abort , redirect , url_for
+from flask_wtf import form
 from .models import User 
 from app import db
 from .forms import RegisterForm , LoginForm
-
+from mod_uploads.forms import FileUploadForm
+from mod_uploads.models import File
+from werkzeug.utils import secure_filename
+import uuid
+from sqlalchemy.exc import IntegrityError
 
 from . import users
 
@@ -38,7 +43,6 @@ def register():
 
 
 
-
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
@@ -70,6 +74,7 @@ def login():
 
 
 
+
 @users.route('/logout/', methods = ['GET'])
 def logout():
     if session.get('email'):
@@ -79,3 +84,26 @@ def logout():
         
     flash('شما وارد نشده اید' , 'warning')
     return(redirect(url_for('users.login')))
+
+
+
+
+
+@users.route('/upload',  methods= ['GET','POST'])
+def upload_file():
+    form = FileUploadForm()
+    if request.method == 'POST':
+        if not form.validate_on_submit():
+            abort(400)
+        filename = f'{uuid.uuid1()}_{ secure_filename(form.file.data.filename)}'
+        new_file = File()
+        new_file.filename = filename
+        try:
+            db.session.add(new_file)
+            db.session.commit()
+            form.file.data.save(f'static/uploads/{filename}')
+            flash('فایل آپلود شد')
+        except IntegrityError:
+            flash('!فایل آپلود نشد' , 'error')
+
+    return render_template('users/upload_file.html' , form=form)

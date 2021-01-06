@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} آپلود فایل {% endblock %}
+
+{% block page_content %}
+{% with messages = get_flashed_messages(True) %}
+{% if messages %}
+<div class="row">
+    {% for message in messages %}
+    <div class="card">
+        <div style="background-color: green;" class="section">
+            {{ message[1] }}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endif %}
+{% endwith %}
+
+
+<form action="{{url_for('users.upload_file')}}" style="background-color:burlywood;">
+    <center><h1>آپلود فایل</h1></center>
+</form>
+<form action="{{url_for('users.upload_file')}}" method="POST" enctype="multipart/form-data" style="background-color:burlywood;">
+    {{ form.hidden_tag() }}
+    فایل : <br><br>{{ form.file }} 
+    <br><br>
+    <input type="submit" value="آپلود فایل">
+</form>
+{% endblock %}
+

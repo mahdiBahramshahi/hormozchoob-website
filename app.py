@@ -18,18 +18,15 @@ def index():
     return render_template('index.html')
 
 from mod_users import users
-app.register_blueprint(users)
-
 from mod_admin import admin
-app.register_blueprint(admin)
-
 from mod_namonekar import nemone_kar
-app.register_blueprint(nemone_kar)
-
-
 from mod_registerwork import register_work
-app.register_blueprint(register_work)
-
-
 from mod_khadamati import khadamati
+from mod_uploads import uploads
+
+app.register_blueprint(users)
+app.register_blueprint(admin)
+app.register_blueprint(nemone_kar)
+app.register_blueprint(register_work)
 app.register_blueprint(khadamati)
+app.register_blueprint(uploads)

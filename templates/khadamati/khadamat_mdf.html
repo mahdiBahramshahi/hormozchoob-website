@@ -4,6 +4,35 @@
 {% block title %} mdf خدمات {% endblock %}
 
 {% block content %}
-<h1> this is khadamat_mdf page </h1>
+<form action="{{url_for('khadamati.khadamat_mdf')}}" style="background-color:burlywood;">
+    <center><h1> mdf خدمات </h1></center>
+</form>
+
+
+<form action="{{url_for('khadamati.index')}}" style="float: left;background-color:burlywood;">
+    <div id="content" style="background-color: rgb(161, 114, 53);">
+    <center><a href="{{url_for('khadamati.khadamat_mdf')}}">
+        <img style="width: 609;height: 350;" src="https://s17.picofile.com/file/8420336468/cut_mdf.jpeg" alt="">
+        <h1>خدمات برش</h1>
+    </a>
+    </center>
+    <br>
+    </div>
+</form>
+
+<form action="{{url_for('khadamati.khadamat_mdf')}}" style="float: left;background-color:burlywood;">
+    <div id="content" style="background-color: rgb(161, 114, 53);">
+    
+    <center><a href="{{url_for('khadamati.khadamat_mdf')}}">
+        <img style="width: 609;height: 350;" src="https://s16.picofile.com/file/8419795318/khadamat_mdf.jpeg" alt="">
+        <h1>pvc خدمات</h1>
+    </a>
+    </center>
+    <br>
+    </div>
+</form>
+        
+
+
 {% endblock %}
 
