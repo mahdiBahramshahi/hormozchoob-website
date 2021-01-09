@@ -32,6 +32,9 @@ def kh_pvc():
 
 @khadamati.route('/cut' ,methods=['GET','POST'])
 def kh_cut():
+    if not session.get('email'):
+        flash('شما حساب کاربری ندارید. ابتدا در این صفحه وارد حساب کاربری تان شوید', 'error')
+        return redirect(url_for('users.login')) 
     form = FileUploadForm()
     if request.method == 'POST' :
         if not session.get('email'):
@@ -39,9 +42,12 @@ def kh_cut():
             return redirect(url_for('users.login')) 
         if not form.validate_on_submit():
             abort(400)
+        
         filename = f'{uuid.uuid1()}_{ secure_filename(form.file.data.filename)}'
+        username = session.get('username')
         new_file = File()
         new_file.filename = filename
+        new_file.username = username
         try:
             db.session.add(new_file)
             db.session.commit()
@@ -49,6 +55,7 @@ def kh_cut():
             flash('فایل آپلود شد')
         except IntegrityError:
             flash('!فایل آپلود نشد' , 'error')
+            return redirect(url_for('khadamati.khadamat_mdf'))
 
 
     return render_template('khadamati/kh_cut.html' , form=form)

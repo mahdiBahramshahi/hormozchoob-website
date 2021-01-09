@@ -22,10 +22,18 @@ def register():
             form.password.errors.append(error_msg)
             form.confirm_password.errors.append(error_msg)
             return render_template('users/register.html', form=form)
+        old_username = User.query.filter(User.username.ilike(form.username.data)).first()
+        if old_username:
+            flash('نام کاربری تکراری میباشد' , 'error')
+            return render_template('users/register.html', form=form)
+
         old_user = User.query.filter(User.email.ilike(form.email.data)).first()
         if old_user:
             flash('ایمیل تکراری می باشد' , 'error')
             return render_template('users/register.html', form=form)
+
+        
+
         new_user = User()
         new_user.username = form.username.data
         new_user.email = form.email.data
@@ -65,6 +73,7 @@ def login():
         
         session['email'] = user.email
         session['user_id'] = user.id
+        session['username'] = user.username
 
         # return redirect(url_for('index'))
     if session.get('email') is not None:

@@ -9,7 +9,7 @@ class User(db.Model):
     email = Column(String(128),nullable=False,unique=True)
     password = Column(String(128),nullable=False,unique=False)
     role = Column(Integer(),nullable=False,default=0)
-    username = Column(String(128),nullable=True,unique=False)
+    username = Column(String(128),nullable=False,unique=True)
 
     def set_password(self,password):
         self.password = generate_password_hash(password)

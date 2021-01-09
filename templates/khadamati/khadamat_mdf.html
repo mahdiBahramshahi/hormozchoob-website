@@ -4,6 +4,22 @@
 {% block title %} mdf خدمات {% endblock %}
 
 {% block content %}
+
+{% with messages = get_flashed_messages(True) %}
+{% if messages %}
+<div class="row">
+    {% for message in messages %}
+    <div class="card {{message[0]}}">
+    <div class="section">
+        {{ message[1] }}
+    </div>
+    </div>
+    {% endfor %}
+    
+</div>
+{% endif %}
+{% endwith %}
+
 <form action="{{url_for('khadamati.khadamat_mdf')}}" style="background-color:burlywood;">
     <center><h1> mdf خدمات </h1></center>
 </form>
