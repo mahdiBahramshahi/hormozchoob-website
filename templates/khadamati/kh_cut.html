@@ -2,6 +2,28 @@
 
 {% block title %} خدمات برش {% endblock %}
 
+{% block styleing %}
+<style>
+  table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  td,
+  th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+  }
+
+  tr:nth-child(even) {
+      background-color: #dddddd;
+  }
+</style>
+{% endblock %}
+
+
 {% block content %}
 
 {% with messages = get_flashed_messages(True) %}
@@ -21,18 +43,222 @@
 
 
 <form action="{{url_for('khadamati.kh_cut')}}" style="background-color:burlywood;">
-    <center><h1>خدمات برش</h1> </center>
-    
+    <center>
+        <h1>خدمات برش</h1>
+    </center>
+
 </form>
 
-<form action="{{url_for('khadamati.kh_cut')}}" method="POST" enctype="multipart/form-data" style="background-color:burlywood;">
-    <center><p style="font-size: large;"> لطفا فایل اندازه ها را در اینجا آپلود کنید</p></center><br>
-    {{ form.hidden_tag() }}
-    آپلود فایل :↓  <br><br>{{ form.file }} 
-    <br><br>
-    <input type="submit" value="آپلود فایل">
+<form action="{{url_for('khadamati.kh_cut')}}" method="POST" enctype="multipart/form-data"
+    style="background-color:burlywood;">
+
+    <center>
+      <p style="font-size: large;"> لطفا فایل اندازه ها را در اینجا آپلود کنید</p>
+  </center><br>
+  {{ form.hidden_tag() }}
+  <div style="margin-left: 10;float: left;">طول : {{ form.height}}</div>
+  <div style="margin-left: 10;float: left;">عرض : {{ form.width }}</div>
+  <div style="margin-left: 10;float: left;">تعداد : {{ form.qty }}</div> <br><br><br>
+  <div style="margin-left: 10;float: left;">pvc : {{ form.pvc }}</div>
+
+
+  <br><br><br><br><br>
+  <div style="margin-left: 10;float: left;">آپلود فایل :↓ <br><br>{{ form.file }} </div> <br><br><br><br>
+
+  <div style="margin-left: 10;float: left;"><input type="submit" value="ثبت سفارش"> </div>
+  <br><br><br><br><br>
+
+
+
+
+    <table>
+        <tr>
+          <!-- <th>ردیف</th> -->
+          <th>طول</th>
+          <th>عرض</th>
+          <th>تعداد</th>
+          <th>pvc</th>
+          <th>توضیحات</th>
+          <th>نوع ورق</th>
+          <th> چرخش</th>
+          <th>شیار</th>
+          <th>فارسی</th>
+          <!-- <th>Company</th> -->
+          
+          
+        </tr>
+        <!-- <tr>
+          <td>Alfreds Futterkiste</td>
+          <td>Maria Anders</td>
+          <td>Germany</td>
+        </tr>
+        <tr>
+          <td>Centro comercial Moctezuma</td>
+          <td>Francisco Chang</td>
+          <td>Mexico</td>
+        </tr> -->
+        <tr>
+          <!-- <td>{{ form.height}}</td> -->
+          <!-- <th > 1 </th> -->
+          <td>{{ height_1 }}</td>
+          <td>{{ width_1}}</td>
+          <td>{{ qty_1 }}</td>
+          <td>{{ pvc_1 }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+
+          <!-- <td>Austria</td> -->
+        </tr>
+        <tr>
+          <!-- <td>{{ form.height}}</td> -->
+          <td>{{ height_2 }}</td>
+          <td>{{ width_2}}</td>
+          <td>{{ qty_2 }}</td>
+          <td>{{ pvc_2 }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+
+          <!-- <td>Austria</td> -->
+        </tr>
+        <tr>
+          <!-- <td>{{ form.height}}</td> -->
+          <td>{{ height_3 }}</td>
+          <td>{{ width_3}}</td>
+          <td>{{ qty_3 }}</td>
+          <td>{{ pvc_3 }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+
+          <!-- <td>Austria</td> -->
+        </tr>
+        <tr>
+          <!-- <td>{{ form.height}}</td> -->
+          <td>{{ height_4 }}</td>
+          <td>{{ width_4}}</td>
+          <td>{{ qty_4 }}</td>
+          <td>{{ pvc_4 }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+
+          <!-- <td>Austria</td> -->
+        </tr>
+        <tr>
+          <!-- <td>{{ form.height}}</td> -->
+          <td>{{ height_5 }}</td>
+          <td>{{ width_5}}</td>
+          <td>{{ qty_5 }}</td>
+          <td>{{ pvc_5 }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+
+          <!-- <td>Austria</td> -->
+        </tr>
+        <tr>
+          <!-- <td>{{ form.height}}</td> -->
+          <td>{{ height_6 }}</td>
+          <td>{{ width_6}}</td>
+          <td>{{ qty_6 }}</td>
+          <td>{{ pvc_6 }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+
+          <!-- <td>Austria</td> -->
+        </tr>
+        <tr>
+          <!-- <td>{{ form.height}}</td> -->
+          <td>{{ height_7 }}</td>
+          <td>{{ width_7}}</td>
+          <td>{{ qty_7 }}</td>
+          <td>{{ pvc_7 }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+
+          <!-- <td>Austria</td> -->
+        </tr>
+        <tr>
+          <!-- <td>{{ form.height}}</td> -->
+          <td>{{ height_8 }}</td>
+          <td>{{ width_8}}</td>
+          <td>{{ qty_8 }}</td>
+          <td>{{ pvc_8 }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+
+          <!-- <td>Austria</td> -->
+        </tr>
+        <tr>
+          <!-- <td>{{ form.height}}</td> -->
+          <td>{{ height_1 }}</td>
+          <td>{{ width_1}}</td>
+          <td>{{ qty_1 }}</td>
+          <td>{{ pvc_1 }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+
+          <!-- <td>Austria</td> -->
+        </tr>
+        <tr>
+          <!-- <td>{{ form.height}}</td> -->
+          <td>{{ session.get('height') }}</td>
+          <td>{{ width_2 }}</td>
+          <td></td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+          <td>{{ session.get('heigh') }}</td>
+
+          <!-- <td>Austria</td> -->
+        </tr>
+        <!-- <tr>
+          <td>Island Trading</td>
+          <td>Helen Bennett</td>
+          <td>UK</td>
+        </tr>
+        <tr>
+          <td>Laughing Bacchus Winecellars</td>
+          <td>Yoshi Tannamuri</td>
+          <td>Canada</td>
+        </tr>
+        <tr>
+          <td>Magazzini Alimentari Riuniti</td>
+          <td>Giovanni Rovelli</td>
+          <td>Italy</td>
+        </tr> -->
+      </table>
+
+
+
+
+    <br><br><br><br>
+
 </form>
 {% endblock %}
-
-
-

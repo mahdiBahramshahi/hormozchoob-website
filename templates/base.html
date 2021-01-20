@@ -196,6 +196,7 @@
     </style>
 
 
+
 </head>
 
 <body style="background-image: url(https://s16.picofile.com/file/8419074942/choob.jpeg); background-repeat: no-repeat;
@@ -209,25 +210,26 @@
         <div id="myNav" class="overlay">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class="overlay-content">
-              <a href="{{url_for('nemone_kar.index')}}">نمونه کار ها</a>
-              <a href="{{url_for('register_work.index')}}">ثبت سفارش کار</a>
-              <a href="{{url_for('users.login')}}">ورود⇥</a>
-              <a href="{{url_for('users.logout')}}">خروج از حساب⇤</a>
+                <a href="{{url_for('nemone_kar.index')}}">نمونه کار ها</a>
+                <a href="{{url_for('register_work.index')}}">ثبت سفارش کار</a>
+                <a href="{{url_for('users.login')}}">ورود⇥</a>
+                <a href="{{url_for('users.logout')}}">خروج از حساب⇤</a>
             </div>
-          </div>
-          
-          
-          <span style="font-size:25px;cursor:pointer;float: left;margin-top: 5;margin-left: 7;" onclick="openNav()">&#9776;کاربری</span>
-          
-          <script>
-          function openNav() {
-            document.getElementById("myNav").style.width = "100%";
-          }
-          
-          function closeNav() {
-            document.getElementById("myNav").style.width = "0%";
-          }
-          </script>
+        </div>
+
+
+        <span style="font-size:25px;cursor:pointer;float: left;margin-top: 5;margin-left: 7;"
+            onclick="openNav()">&#9776;کاربری</span>
+
+        <script>
+            function openNav() {
+                document.getElementById("myNav").style.width = "100%";
+            }
+
+            function closeNav() {
+                document.getElementById("myNav").style.width = "0%";
+            }
+        </script>
 
         <li><a href="{{url_for('index')}}">خانه</a></li>
         <!-- <li><a href="{{url_for('nemone_kar.index')}}">نمونه کارها</a></li> -->
@@ -246,7 +248,7 @@
         </li>
     </ul>
 
-    
+
 
 
     {% block content %}
