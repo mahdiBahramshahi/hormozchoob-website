@@ -1,0 +1,46 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+{% with messages = get_flashed_messages(True) %}
+{% if messages %}
+<div class="row">
+    {% for message in messages %}
+    <div class="card {{message[0]}}">
+        <div class="section">
+            {{ message[1] }}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endif %}
+{% endwith %}
+<form action="{{ url_for('admin.list_projects') }}">
+    <center><h1>پروژه ها</h1></center>
+</form>
+<table>
+    
+    <!-- <caption>پروژه ها</caption> -->
+    <thead>
+      <tr>
+        <!-- <th>ردیف</th> -->
+        <th>سفارش دهنده</th>
+        <th>نام پروژه</th>
+        <th>قابلیت ها</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for project in projects %}
+        <tr>
+          <!-- <td data-label="ردیف">{{ project.id }}</td> -->
+          <td data-label="نام سفارش دهنده">{{ project.username }}</td>
+          <td data-label="نام پروژه"><a href="{{ url_for('admin.single_project' , slug = project.slug) }}">{{ project.project_name }}</a></td>
+          <td data-label="قابلیت ها">
+            <a  href="{{ url_for('admin.delete_project' , project_id = project.id) }}" role="button">حذف</a>
+          </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

@@ -56,10 +56,16 @@
       <p style="font-size: large;"> لطفا فایل اندازه ها را در اینجا آپلود کنید</p>
   </center><br>
   {{ form.hidden_tag() }}
-  <div style="margin-left: 10;float: left;">طول : {{ form.height}}</div>
-  <div style="margin-left: 10;float: left;">عرض : {{ form.width }}</div>
-  <div style="margin-left: 10;float: left;">تعداد : {{ form.qty }}</div> <br><br><br>
+  <div style="margin-left: 10;float: left;">طول : {{ form.height(size=1, maxlength=50)  }}</div>
+  <div style="margin-left: 10;float: left;">عرض : {{ form.width(size=1, maxlength=50) }}</div>
+  <div style="margin-left: 10;float: left;">تعداد : {{ form.qty(size=1, maxlength=50) }}</div> 
   <div style="margin-left: 10;float: left;">pvc : {{ form.pvc }}</div>
+  <div style="margin-left: 10;float: left;">نوع ورق : {{ form.mdf_model(size=1, maxlength=50) }}</div> 
+  <div style="margin-left: 10;float: left;">شیار : {{ form.shiar }}</div> 
+  <div style="margin-left: 10;float: left;">فارسی : {{ form.farsi }}</div><br><br><br><br>
+  <div style="margin-left: 10;float: left;">چرخش : {{ form.Charkhesh }}</div>   
+  <div style="margin-left: 10;float: left;">توضیحات : {{ form.about(size=1, maxlength=50) }}</div> 
+
 
 
   <br><br><br><br><br>
@@ -71,189 +77,48 @@
 
 
 
-    <table>
-        <tr>
-          <!-- <th>ردیف</th> -->
-          <th>طول</th>
-          <th>عرض</th>
-          <th>تعداد</th>
-          <th>pvc</th>
-          <th>توضیحات</th>
-          <th>نوع ورق</th>
-          <th> چرخش</th>
-          <th>شیار</th>
-          <th>فارسی</th>
-          <!-- <th>Company</th> -->
-          
-          
-        </tr>
-        <!-- <tr>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>Germany</td>
-        </tr>
-        <tr>
-          <td>Centro comercial Moctezuma</td>
-          <td>Francisco Chang</td>
-          <td>Mexico</td>
-        </tr> -->
-        <tr>
-          <!-- <td>{{ form.height}}</td> -->
-          <!-- <th > 1 </th> -->
-          <td>{{ height_1 }}</td>
-          <td>{{ width_1}}</td>
-          <td>{{ qty_1 }}</td>
-          <td>{{ pvc_1 }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
 
-          <!-- <td>Austria</td> -->
-        </tr>
-        <tr>
-          <!-- <td>{{ form.height}}</td> -->
-          <td>{{ height_2 }}</td>
-          <td>{{ width_2}}</td>
-          <td>{{ qty_2 }}</td>
-          <td>{{ pvc_2 }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
 
-          <!-- <td>Austria</td> -->
-        </tr>
-        <tr>
-          <!-- <td>{{ form.height}}</td> -->
-          <td>{{ height_3 }}</td>
-          <td>{{ width_3}}</td>
-          <td>{{ qty_3 }}</td>
-          <td>{{ pvc_3 }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
 
-          <!-- <td>Austria</td> -->
-        </tr>
-        <tr>
-          <!-- <td>{{ form.height}}</td> -->
-          <td>{{ height_4 }}</td>
-          <td>{{ width_4}}</td>
-          <td>{{ qty_4 }}</td>
-          <td>{{ pvc_4 }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
 
-          <!-- <td>Austria</td> -->
-        </tr>
-        <tr>
-          <!-- <td>{{ form.height}}</td> -->
-          <td>{{ height_5 }}</td>
-          <td>{{ width_5}}</td>
-          <td>{{ qty_5 }}</td>
-          <td>{{ pvc_5 }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
+  <table>
+    
+    <!-- <caption>پروژه ها</caption> -->
+    <thead>
+      <tr>
+        <!-- <th>ردیف</th> -->
+        <th>طول</th>
+        <th>عرض</th>
+        <th>تعداد</th>
+        <th>pvc جهت</th>
+        <th>نوع ورق</th>
+        <th>شیار</th>
+        <th>فارسی</th>
+        <!-- <th>چرخش</th> -->
+        <th>توضیحات</th>
 
-          <!-- <td>Austria</td> -->
-        </tr>
-        <tr>
-          <!-- <td>{{ form.height}}</td> -->
-          <td>{{ height_6 }}</td>
-          <td>{{ width_6}}</td>
-          <td>{{ qty_6 }}</td>
-          <td>{{ pvc_6 }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
 
-          <!-- <td>Austria</td> -->
-        </tr>
+      </tr>
+    </thead>
+    <tbody>
+        {% for table in project_name %}
         <tr>
-          <!-- <td>{{ form.height}}</td> -->
-          <td>{{ height_7 }}</td>
-          <td>{{ width_7}}</td>
-          <td>{{ qty_7 }}</td>
-          <td>{{ pvc_7 }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
+          <td data-label="طول">{{ table.height }}</a></td>
+          <td data-label="عرض">{{ table.width }}</td>
+          <td data-label="تعداد">{{ table.qty }}</a></td>
+          <td data-label="pvc جهت ">{{ table.pvc }}</a></td>
+          <td data-label="نوع ورق">{{ table.mdf_model }}</a></td>
+          <td data-label="شیار">{{ table.shiar }}</a></td>
+          <td data-label="فارسی">{{ table.farsi }}</a></td>
+          <!-- <td data-label="چرخش">{{ table.Charkhesh }}</a></td> -->
+          <td data-label="توضیحات">{{ table.about }}</a></td>
 
-          <!-- <td>Austria</td> -->
-        </tr>
-        <tr>
-          <!-- <td>{{ form.height}}</td> -->
-          <td>{{ height_8 }}</td>
-          <td>{{ width_8}}</td>
-          <td>{{ qty_8 }}</td>
-          <td>{{ pvc_8 }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
 
-          <!-- <td>Austria</td> -->
         </tr>
-        <tr>
-          <!-- <td>{{ form.height}}</td> -->
-          <td>{{ height_1 }}</td>
-          <td>{{ width_1}}</td>
-          <td>{{ qty_1 }}</td>
-          <td>{{ pvc_1 }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
+        {% endfor %}
+    </tbody>
+  </table>
 
-          <!-- <td>Austria</td> -->
-        </tr>
-        <tr>
-          <!-- <td>{{ form.height}}</td> -->
-          <td>{{ session.get('height') }}</td>
-          <td>{{ width_2 }}</td>
-          <td></td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-          <td>{{ session.get('heigh') }}</td>
-
-          <!-- <td>Austria</td> -->
-        </tr>
-        <!-- <tr>
-          <td>Island Trading</td>
-          <td>Helen Bennett</td>
-          <td>UK</td>
-        </tr>
-        <tr>
-          <td>Laughing Bacchus Winecellars</td>
-          <td>Yoshi Tannamuri</td>
-          <td>Canada</td>
-        </tr>
-        <tr>
-          <td>Magazzini Alimentari Riuniti</td>
-          <td>Giovanni Rovelli</td>
-          <td>Italy</td>
-        </tr> -->
-      </table>
 
 
 
