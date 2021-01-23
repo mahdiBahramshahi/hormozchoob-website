@@ -3,6 +3,8 @@ from sqlalchemy.sql.elements import Null
 from sqlalchemy.sql.functions import user
 from wtforms.validators import DataRequired
 from . import khadamati
+from mod_users.models import User
+from  mod_users.forms import RegisterForm, LoginForm
 
 from flask import  render_template , abort , request , flash , session
 import uuid
@@ -21,20 +23,27 @@ def index():
 def khadamat_choob():
     return render_template('khadamati/khadamat_choob.html')
 
+
+
+
+
+
+
 @khadamati.route('/khadamat_mdf' ,methods=['GET','POST'])
 def khadamat_mdf():
     if not session.get('email'):
         flash('شما حساب کاربری ندارید. ابتدا در این صفحه وارد حساب کاربری تان شوید', 'error')
-        return redirect(url_for('users.login'))
+        return redirect(url_for('khadamati.login'))
     form = FileUploadForm()
     if request.method == 'POST' :
         if not session.get('email'):
             flash(' شما حساب کاربری ندارید. ابتدا در این صفحه وارد حساب کاربری تان شوید','error')
-            return redirect(url_for('users.login')) 
+            return redirect(url_for('khadamati.login')) 
             
         # if not form.validate_on_submit():
         #     abort(400)
 
+        # session.pop('project_name')
         session['project_name'] = request.form.get('project_name')
 
         old_projectname = File.query.filter(File.project_name.ilike(form.project_name.data)).first()
@@ -73,16 +82,96 @@ def kh_pvc():
 
 
 
+
+@khadamati.route('/register', methods=['GET','POST'])
+def register():
+    form = RegisterForm(request.form)
+    if request.method == 'POST':
+        if not form.validate_on_submit():
+            return render_template('khadamati/register.html', form=form)
+        if not form.password.data == form.confirm_password.data:
+            error_msg = 'Password and Confirm Password does not match.'
+            form.password.errors.append(error_msg)
+            form.confirm_password.errors.append(error_msg)
+            return render_template('khadamati/register.html', form=form)
+        old_username = User.query.filter(User.username.ilike(form.username.data)).first()
+        if old_username:
+            flash('نام کاربری تکراری میباشد' , 'error')
+            return render_template('khadamati/register.html', form=form)
+
+        old_user = User.query.filter(User.email.ilike(form.email.data)).first()
+        if old_user:
+            flash('ایمیل تکراری می باشد' , 'error')
+            return render_template('khadamati/register.html', form=form)
+
+        
+
+        new_user = User()
+        new_user.username = form.username.data
+        new_user.email = form.email.data
+        new_user.set_password(form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
+        
+        flash('ثبت نام با موفقیت انجام شد' , 'success')
+        return redirect(url_for('khadamati.login'))
+        # except IntegrityError:
+        #     db.session.rollback()
+        #     flash('Email is in use.' , 'error')
+    return render_template('khadamati/register.html', form=form)
+
+
+
+
+
+
+@khadamati.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm(request.form)
+    if request.method == 'POST':
+        if not form.validate_on_submit():
+            abort(400)
+        user = User.query.filter(User.email.ilike(f"{form.email.data}")).first()
+
+        if not user:
+            flash("شما ثبت نام نکرده اید", category='error')
+            return render_template('khadamati/login.html', form=form)
+
+        if not user.check_password(form.password.data):
+            flash("نام کابری / رمز ورود  نادرست است", category='error')
+            return render_template('khadamati/login.html', form=form)
+        
+        # if user:
+        #     flash("شما از قبل وارد شده اید", category='error')
+        #     return(redirect(url_for('index')))
+        
+        session['email'] = user.email
+        session['user_id'] = user.id
+        session['username'] = user.username
+
+        # return redirect(url_for('index'))
+    if session.get('email') is not None:
+        flash("ورود با موفقیت انجام شد", category='')
+        return redirect(url_for('khadamati.khadamat_mdf'))
+    return render_template('khadamati/login.html', form=form)
+
+
+
+
+
+
+
+
 @khadamati.route('/cut' ,methods=['GET','POST'])
 def kh_cut():
     if not session.get('email'):
         flash('شما حساب کاربری ندارید. ابتدا در این صفحه وارد حساب کاربری تان شوید', 'error')
-        return redirect(url_for('users.login')) 
+        return redirect(url_for('khadamati.login')) 
     form = FileUploadForm()
     if request.method == 'POST' :
         if not session.get('email'):
             flash(' شما حساب کاربری ندارید. ابتدا در این صفحه وارد حساب کاربری تان شوید','error')
-            return redirect(url_for('users.login')) 
+            return redirect(url_for('khadamati.login')) 
         if not form.validate_on_submit():
             abort(400)
         

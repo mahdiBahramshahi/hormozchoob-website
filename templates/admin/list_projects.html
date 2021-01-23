@@ -1,6 +1,6 @@
 {% extends 'admin/base.html' %}
 
-{% block content %}
+{% block page_content %}
 {% with messages = get_flashed_messages(True) %}
 {% if messages %}
 <div class="row">
@@ -23,7 +23,7 @@
     <!-- <caption>پروژه ها</caption> -->
     <thead>
       <tr>
-        <!-- <th>ردیف</th> -->
+        <th>ردیف</th>
         <th>سفارش دهنده</th>
         <th>نام پروژه</th>
         <th>قابلیت ها</th>
@@ -32,7 +32,7 @@
     <tbody>
         {% for project in projects %}
         <tr>
-          <!-- <td data-label="ردیف">{{ project.id }}</td> -->
+          <td data-label="ردیف">{{ project.id }}</td>
           <td data-label="نام سفارش دهنده">{{ project.username }}</td>
           <td data-label="نام پروژه"><a href="{{ url_for('admin.single_project' , slug = project.slug) }}">{{ project.project_name }}</a></td>
           <td data-label="قابلیت ها">

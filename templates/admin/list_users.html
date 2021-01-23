@@ -1,0 +1,29 @@
+{% extends 'admin/base.html' %}
+
+{% block page_content %}
+<form action="{{ url_for('admin.list_users') }}">
+    <center><h1>لیست کاربران</h1></center>
+</form>
+<table>
+    
+    <!-- <caption>پروژه ها</caption> -->
+    <thead>
+      <tr>
+        <th>ردیف</th>
+        <th>نام کاربری</th>
+        <th>ایمیل</th>
+        <th>نقش</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+          <td data-label="ردیف">{{ user.id }}</td>
+          <td data-label="نام کاربری">{{ user.username }}</td>
+          <td data-label="ایمیل">{{ user.email }}</td>
+          <td data-label="نقش">{{ 'Admin' if user.role else 'User' }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

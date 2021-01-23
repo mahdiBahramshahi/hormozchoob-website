@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %} ورود ادمین {% endblock %}
+{% block title %} ورود کاربر {% endblock %}
 
-{% block page_content %}
-<form action="{{url_for('admin.login')}}" method="POST" style="background-color:burlywood;">
+{% block content %}
+<form action="{{url_for('khadamati.login')}}" style="background-color:burlywood;" >
+    <center><h1>ورود به حساب</h1></center>
+</form>
+<form action="{{url_for('khadamati.login')}}" method="POST" style="background-color:burlywood;">
     {% with messages = get_flashed_messages(True) %}
         {% if messages %}
         <div class="row">
@@ -19,8 +22,10 @@
         {% endif %}
     {% endwith %}
     {{form.hidden_tag()}}
-    آدرس ایمیل : {{form.email }} <br>
-    گذرواژه  : {{form.password }} <br>
+    آدرس ایمیل : {{form.email }} <br><br>
+    گذرواژه : {{form.password }} <br><br>
     <input type="submit" value="ورود">
+    <a href="{{url_for('khadamati.register')}}">ثبت نام</a>
 </form>
+
 {% endblock %}

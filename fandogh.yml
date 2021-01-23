@@ -1,0 +1,11 @@
+kind: ExternalService
+name: hormoz-choob
+spec:
+  image: hormoz_choob:0.1
+  port: 80
+  env:
+    - name: SQLALCHEMY_DATABASE_URI
+      value: mysql+pymysql://root:${DB_PASSWORD}@hormoz-choob-db/hormoz_choob
+    - name: SECRET_KEY
+      value: ${SECRET_KEY}
+  static_path: /static/

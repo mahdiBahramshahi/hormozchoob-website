@@ -2,6 +2,71 @@
 
 {% block content %}
 
-<h1>dofiuhvjsreirhusiuhjcruny</h1>
+
+
+
+{% with messages = get_flashed_messages(True) %}
+{% if messages %}
+<div class="row">
+    {% for message in messages %}
+    <div class="card {{message[0]}}">
+        <div class="section">
+            {{ message[1] }}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endif %}
+{% endwith %}
+
+<form action="{{ url_for('admin.index') }}" style="background-color:burlywood;">
+    <center><img style="width: 390;" src="https://s16.picofile.com/file/8419184784/company_logo.jpeg" alt="هرمزچوب"></center>
+    <center><h1 style="font-size: 40; color: white;">پنل ادمین شرکت صنایع چوبی هرمزچوب</h1></center>
+</form> 
+
+
+<!-- <form action="{{url_for('admin.index')}}" style="background-color:burlywood;">
+<center><h1>پنل ادمین</h1></center>
+</form> -->
+
+
+<form action="{{url_for('admin.index')}}" style="float: left;background-color:burlywood;">
+    <div id="content" style="background-color: rgb(161, 114, 53);">
+    <center><a href="{{url_for('admin.list_projects')}}">
+        <img style="width: 390;height: 300;" src="https://s16.picofile.com/file/8419795318/khadamat_mdf.jpeg" alt="">
+        <h1>لیست پروژه ها</h1>
+    </a>
+    </center>
+    <br>
+    </div>
+</form>
+
+<form action="{{url_for('admin.list_users')}}" style="float: left;background-color:burlywood;">
+    <div id="content" style="background-color: rgb(161, 114, 53);">
+    <center><a href="{{url_for('admin.list_users')}}">
+        <img style="width: 390;height: 300;" src="https://s16.picofile.com/file/8422425392/user_logo.jpeg
+        " alt="">
+        <h1>لیست کاربران</h1>
+    </a>
+    </center>
+    <br>
+    </div>
+</form>
+
+
+<form action="{{url_for('admin.create_user')}}" style="float: left;background-color:burlywood;">
+    <div id="content" style="background-color: rgb(161, 114, 53);">
+    <center><a href="{{url_for('admin.create_user')}}">
+        <img style="width: 390;height: 300;" src="https://s16.picofile.com/file/8422427092/create_user_logo.jpeg
+        " alt="">
+        <h1>اضافه کردن کاربر</h1>
+    </a>
+    </center>
+    <br>
+    </div>
+</form>
+
+
 
 {% endblock %}

@@ -1,5 +1,5 @@
 from flask import session , render_template , request , abort , flash , redirect, url_for
-from mod_users.forms import LoginForm
+from mod_users.forms import LoginForm , RegisterForm
 from mod_users.models import User
 from .import admin
 from .utils import admin_only_view
@@ -20,15 +20,15 @@ def login():
         user = User.query.filter(User.email.ilike(f"{form.email.data}")).first()
 
         if not user:
-            flash("Incorrect credentials", category='error')
+            flash("ورود نامعتبر است", category='error')
             return render_template('admin/login.html', form=form)
 
         if not user.check_password(form.password.data):
-            flash("Incorrect credentials", category='error')
+            flash("ورود نامعتبر است", category='error')
             return render_template('admin/login.html', form=form)
 
         if not user.is_admin():
-            flash("Incorrect credentials", category='error')
+            flash("ورود نامعتبر است", category='error')
             return render_template('admin/login.html', form=form)
         
         session['email'] = user.email
@@ -38,6 +38,9 @@ def login():
     if session.get('role') == 1:
         return redirect(url_for('admin.index'))
     return render_template('admin/login.html', form=form)
+
+
+
 
 @admin.route('/logout/', methods = ['GET'])
 @admin_only_view
@@ -50,12 +53,69 @@ def logout():
     flash('شما وارد نشده اید' , 'warning')
     return(redirect(url_for('admin.login')))
 
-@admin.route('/projectss')
-@admin_only_view
-def projects():
-    projects = kh_project.query.order_by(kh_project.id.desc()).all()
 
-    return render_template('admin/projects.html' , projects=projects)
+
+
+@admin.route('/list_users/' , methods=['GET'])
+@admin_only_view
+def list_users():
+    users = User.query.order_by(User.id.desc()).all()
+    return render_template('admin/list_users.html' , users=users)
+
+
+
+
+
+@admin.route('/users/new/' , methods=['GET','POST'])
+@admin_only_view
+def create_user():
+    form = RegisterForm(request.form)
+    if request.method == 'POST':
+        if not form.validate_on_submit():
+            return render_template('admin/create_user.html', form=form)
+        if not form.password.data == form.confirm_password.data:
+            error_msg = 'Password and Confirm Password does not match.'
+            form.password.errors.append(error_msg)
+            form.confirm_password.errors.append(error_msg)
+            return render_template('admin/create_user.html', form=form)
+        old_username = User.query.filter(User.username.ilike(form.username.data)).first()
+        if old_username:
+            flash('نام کاربری تکراری میباشد' , 'error')
+            return render_template('admin/create_user.html', form=form)
+
+        old_user = User.query.filter(User.email.ilike(form.email.data)).first()
+        if old_user:
+            flash('ایمیل تکراری می باشد' , 'error')
+            return render_template('admin/create_user.html', form=form)
+
+        
+
+        new_user = User()
+        new_user.username = form.username.data
+        new_user.email = form.email.data
+        new_user.set_password(form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
+        
+        flash('کاربر با موفقیت ساخته شد' , 'success')
+        return redirect(url_for('admin.index'))
+        # except IntegrityError:
+        #     db.session.rollback()
+        #     flash('Email is in use.' , 'error')
+    return render_template('admin/create_user.html', form=form)
+
+
+
+
+
+# @admin.route('/projectss')
+# @admin_only_view
+# def projects():
+#     projects = kh_project.query.order_by(kh_project.id.desc()).all()
+
+#     return render_template('admin/projects.html' , projects=projects)
+
+
 
 @admin.route('/<string:slug>')
 @admin_only_view
@@ -70,7 +130,7 @@ def single_project(slug):
 
 
 
-@admin.route('/projects' , methods=['GET'])
+@admin.route('/projects/' , methods=['GET'])
 @admin_only_view
 def list_projects():
     projects= kh_project.query.order_by(kh_project.id.desc()).all()
