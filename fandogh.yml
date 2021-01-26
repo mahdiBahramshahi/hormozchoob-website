@@ -1,7 +1,7 @@
 kind: ExternalService
 name: hormoz-choob
 spec:
-  image: hormoz_choob:0.1
+  image: hormoz_choob:0.2
   port: 80
   env:
     - name: SQLALCHEMY_DATABASE_URI

@@ -54,18 +54,18 @@ def khadamat_mdf():
         
 
 
-    if session.get('project_name') is not None:
-        try:
-            username = session.get('username')
-            name_of_projects = kh_project()
-            name_of_projects.project_name = request.form.get('project_name')
-            name_of_projects.username = username
-            name_of_projects.slug = f"{name_of_projects.project_name}"
-            db.session.add(name_of_projects)
-            db.session.commit()
-        except IntegrityError:
-            flash('نام پروژه تکراری میباشد' , 'error')
-            return render_template('khadamati/khadamat_mdf.html')
+    # if session.get('project_name') is not None:
+    #     try:
+    #         username = session.get('username')
+    #         name_of_projects = kh_project()
+    #         name_of_projects.project_name = request.form.get('project_name')
+    #         name_of_projects.username = username
+    #         name_of_projects.slug = f"{name_of_projects.project_name}"
+    #         db.session.add(name_of_projects)
+    #         db.session.commit()
+    #     except IntegrityError:
+    #         flash('نام پروژه تکراری میباشد' , 'error')
+    #         return render_template('khadamati/khadamat_mdf.html')
 
         flash("پروژه با موفقیت ساخته شد", category='')
         return redirect(url_for('khadamati.kh_cut'))
@@ -218,7 +218,7 @@ def kh_cut():
     
 
     if not session.get('project_name'):
-        flash('شما پروژه تان را نساخته اید')
+        flash('شما پروژه تان را نساخته اید' , 'error')
         return redirect(url_for('khadamati.khadamat_mdf'))
         
         
@@ -226,3 +226,27 @@ def kh_cut():
     
     # try:
     return render_template('khadamati/kh_cut.html' , form=form , project_name=project_name)
+
+
+@khadamati.route('/register_project' ,methods=['GET'])
+def register_end():
+    if session.get('project_name'):
+        project_name = File.query.filter(File.project_name == session.get('project_name')) 
+    if project_name:
+        if session.get('project_name') is not None:
+            try:
+                username = session.get('username')
+                name_of_projects = kh_project()
+                name_of_projects.project_name = session.get('project_name')
+                name_of_projects.username = username
+                name_of_projects.slug = f"{name_of_projects.project_name}"
+                db.session.add(name_of_projects)
+                db.session.commit()
+            except IntegrityError:
+                flash('!پروژه ثبت نشد' , 'error')
+                return render_template('khadamati/khadamat_mdf.html')
+            flash('سفارش با موفقیت ثبت شد ')
+            session.pop('project_name')
+        return redirect(url_for('khadamati.khadamat_mdf'))
+    return redirect(url_for('khadamati.khadamat_mdf')) 
+

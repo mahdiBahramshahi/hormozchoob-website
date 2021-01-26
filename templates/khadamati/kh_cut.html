@@ -67,11 +67,9 @@
   <div style="margin-left: 10;float: left;">توضیحات : {{ form.about(size=1, maxlength=50) }}</div> 
 
 
+  <br><br><br>
 
-  <br><br><br><br><br>
-  <div style="margin-left: 10;float: left;">آپلود فایل :↓ <br><br>{{ form.file }} </div> <br><br><br><br>
-
-  <div style="margin-left: 10;float: left;"><input type="submit" value="ثبت سفارش"> </div>
+  <div style="margin-left: 10;float: left;"><input type="submit" value="ثبت و ادامه"> </div>
   <br><br><br><br><br>
 
 
@@ -125,5 +123,10 @@
 
     <br><br><br><br>
 
+
+  <br><br><br>
+  <div style="margin-left: 10;float: left;">آپلود فایل :↓ <br><br>{{ form.file }} </div> <br><br><br><br>
+  
+  <button><a href="{{url_for('khadamati.register_end')}}"> ثبت نهایی</a></button>
 </form>
 {% endblock %}

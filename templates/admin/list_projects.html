@@ -1,5 +1,10 @@
 {% extends 'admin/base.html' %}
 
+{% block title %}لیست پروژه ها{% endblock %}
+
+
+
+
 {% block page_content %}
 {% with messages = get_flashed_messages(True) %}
 {% if messages %}
@@ -27,6 +32,8 @@
         <th>سفارش دهنده</th>
         <th>نام پروژه</th>
         <th>قابلیت ها</th>
+        <th>وضعیت</th>
+
       </tr>
     </thead>
     <tbody>
@@ -38,6 +45,7 @@
           <td data-label="قابلیت ها">
             <a  href="{{ url_for('admin.delete_project' , project_id = project.id) }}" role="button">حذف</a>
           </td>
+          <td data-label="وضعیت">{{ register_end }}</td>
         </tr>
         {% endfor %}
     </tbody>

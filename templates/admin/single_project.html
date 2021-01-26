@@ -1,8 +1,12 @@
 {% extends 'admin/base.html' %}
+{% block title %}
+{{ project.project_name }}  پروژه 
+{% endblock %}
 
 {% block page_content %}
-
-<h1> {{ project.project_name }} </h1>
+<form action="{{ url_for('admin.list_projects') }}">
+  <center><h1> {{ project.project_name }} </h1></center>
+</form>
 <table>
     
     <!-- <caption>پروژه ها</caption> -->
