@@ -12,7 +12,7 @@ from mod_uploads.forms import FileUploadForm
 from mod_uploads.models import File , kh_project
 from werkzeug.utils import redirect, secure_filename
 from app import db
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError , ArgumentError
 
 
 @khadamati.route('/')
@@ -44,32 +44,34 @@ def khadamat_mdf():
         #     abort(400)
 
         # session.pop('project_name')
-        session['project_name'] = request.form.get('project_name')
+        try:
+            session['project_name'] = request.form.get('project_name')
 
-        old_projectname = File.query.filter(File.project_name.ilike(form.project_name.data)).first()
-        if old_projectname:
-            flash('نام پروژه تکراری میباشد' , 'error')
-            return render_template('khadamati/khadamat_mdf.html')
-        
-        
+            old_projectname = File.query.filter(File.project_name.ilike(form.project_name.data)).first()
+            if old_projectname:
+                flash('نام پروژه تکراری میباشد' , 'error')
+                return render_template('khadamati/khadamat_mdf.html')
 
 
-    # if session.get('project_name') is not None:
-    #     try:
-    #         username = session.get('username')
-    #         name_of_projects = kh_project()
-    #         name_of_projects.project_name = request.form.get('project_name')
-    #         name_of_projects.username = username
-    #         name_of_projects.slug = f"{name_of_projects.project_name}"
-    #         db.session.add(name_of_projects)
-    #         db.session.commit()
-    #     except IntegrityError:
-    #         flash('نام پروژه تکراری میباشد' , 'error')
-    #         return render_template('khadamati/khadamat_mdf.html')
 
-        flash("پروژه با موفقیت ساخته شد", category='')
-        return redirect(url_for('khadamati.kh_cut'))
-    
+
+        # if session.get('project_name') is not None:
+        #     try:
+        #         username = session.get('username')
+        #         name_of_projects = kh_project()
+        #         name_of_projects.project_name = request.form.get('project_name')
+        #         name_of_projects.username = username
+        #         name_of_projects.slug = f"{name_of_projects.project_name}"
+        #         db.session.add(name_of_projects)
+        #         db.session.commit()
+        #     except IntegrityError:
+        #         flash('نام پروژه تکراری میباشد' , 'error')
+        #         return render_template('khadamati/khadamat_mdf.html')
+
+            flash("پروژه با موفقیت ساخته شد", category='')
+            return redirect(url_for('khadamati.kh_cut'))
+        except ArgumentError:
+                abort(400)
     return render_template('khadamati/khadamat_mdf.html')
 
 
@@ -138,7 +140,7 @@ def login():
             return render_template('khadamati/login.html', form=form)
 
         if not user.check_password(form.password.data):
-            flash("نام کابری / رمز ورود  نادرست است", category='error')
+            flash("نام کاربری / رمز ورود  نادرست است", category='error')
             return render_template('khadamati/login.html', form=form)
         
         # if user:

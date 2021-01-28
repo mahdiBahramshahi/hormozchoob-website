@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ project.project_name }}  پروژه 
+{% endblock %}
+
+{% block content %}
+<form action="{{ url_for('users.my_projects') }}">
+  <center><h1> {{ project.project_name }} </h1></center>
+</form>
+<table>
+    
+    <!-- <caption>پروژه ها</caption> -->
+    <thead>
+      <tr>
+        <!-- <th>ردیف</th> -->
+        <th>طول</th>
+        <th>عرض</th>
+        <th>تعداد</th>
+        <th>pvc جهت</th>
+        <th>نوع ورق</th>
+        <th>شیار</th>
+        <th>فارسی</th>
+        <!-- <th>چرخش</th> -->
+        <th>توضیحات</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+        {% for table in project_name %}
+        <tr>
+          <td data-label="طول">{{ table.height }}</a></td>
+          <td data-label="عرض">{{ table.width }}</td>
+          <td data-label="تعداد">{{ table.qty }}</a></td>
+          <td data-label="pvc جهت ">{{ table.pvc }}</a></td>
+          <td data-label="نوع ورق">{{ table.mdf_model }}</a></td>
+          <td data-label="شیار">{{ table.shiar }}</a></td>
+          <td data-label="فارسی">{{ table.farsi }}</a></td>
+          <!-- <td data-label="چرخش">{{ table.Charkhesh }}</a></td> -->
+          <td data-label="توضیحات">{{ table.about }}</a></td>
+
+
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

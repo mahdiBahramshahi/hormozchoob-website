@@ -4,7 +4,7 @@ from .models import User
 from app import db
 from .forms import RegisterForm , LoginForm
 from mod_uploads.forms import FileUploadForm
-from mod_uploads.models import File
+from mod_uploads.models import File, kh_project
 from werkzeug.utils import secure_filename
 import uuid
 from sqlalchemy.exc import IntegrityError
@@ -64,7 +64,7 @@ def login():
             return render_template('users/login.html', form=form)
 
         if not user.check_password(form.password.data):
-            flash("نام کابری / رمز ورود  نادرست است", category='error')
+            flash("نام کاربری / رمز ورود  نادرست است", category='error')
             return render_template('users/login.html', form=form)
         
         # if user:
@@ -98,22 +98,41 @@ def logout():
 
 
 
-@users.route('/upload',  methods= ['GET','POST'])
-def upload_file():
-    form = FileUploadForm()
-    if request.method == 'POST':
-        if not form.validate_on_submit():
-            abort(400)
-        filename = f'{uuid.uuid1()}_{ secure_filename(form.file.data.filename)}'
-        new_file = File()
-        new_file.filename = filename
-        try:
-            db.session.add(new_file)
-            db.session.commit()
-            form.file.data.save(f'static/uploads/khadamati/cut/{filename}')
-            flash('فایل آپلود شد')
-        except IntegrityError:
-            flash('!فایل آپلود نشد' , 'error')
+# @users.route('/upload',  methods= ['GET','POST'])
+# def upload_file():
+#     form = FileUploadForm()
+#     if request.method == 'POST':
+#         if not form.validate_on_submit():
+#             abort(400)
+#         filename = f'{uuid.uuid1()}_{ secure_filename(form.file.data.filename)}'
+#         new_file = File()
+#         new_file.filename = filename
+#         try:
+#             db.session.add(new_file)
+#             db.session.commit()
+#             form.file.data.save(f'static/uploads/khadamati/cut/{filename}')
+#             flash('فایل آپلود شد')
+#         except IntegrityError:
+#             flash('!فایل آپلود نشد' , 'error')
 
-    return render_template('users/upload_file.html' , form=form)
+#     return render_template('users/upload_file.html' , form=form)
 
+
+
+
+@users.route('/my_projects',  methods= ['GET','POST'])
+def my_projects():
+    if not session.get('email'):
+        flash('شما حساب کاربری ندارید. ابتدا در این صفحه وارد حساب کاربری تان شوید', 'error')
+        return redirect(url_for('users.login')) 
+    my_projects = kh_project.query.order_by(kh_project.id.desc()).filter(kh_project.username == session.get('username')).all()
+    return render_template('users/my_projects.html' , my_projects=my_projects)
+    
+@users.route('/<string:slug>')
+def single_project(slug):
+    project = kh_project.query.filter(kh_project.slug == slug).first_or_404()
+    project_name = File.query.filter(File.project_name == project.project_name)
+
+
+
+    return render_template('users/single_project.html' , project=project , project_name=project_name)
