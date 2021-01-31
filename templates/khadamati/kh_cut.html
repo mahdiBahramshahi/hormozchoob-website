@@ -56,15 +56,15 @@
       <p style="font-size: large;"> لطفا اندازه برش ها را یک به یک وارد کنید</p>
   </center><br>
   {{ form.hidden_tag() }}
-  <div style="margin-left: 10;float: left;">طول : {{ form.height(size=1, maxlength=50)  }}</div>
-  <div style="margin-left: 10;float: left;">عرض : {{ form.width(size=1, maxlength=50) }}</div>
-  <div style="margin-left: 10;float: left;">تعداد : {{ form.qty(size=1, maxlength=50) }}</div> 
-  <div style="margin-left: 10;float: left;">نوع ورق : {{ form.mdf_model(size=1, maxlength=50) }}</div> 
+  <div style="margin-left: 10;float: left;">طول : {{ form.height(size=1, maxlength=10)  }}</div>
+  <div style="margin-left: 10;float: left;">عرض : {{ form.width(size=1, maxlength=10) }}</div>
+  <div style="margin-left: 10;float: left;">تعداد : {{ form.qty(size=1, maxlength=10) }}</div> 
+  <div style="margin-left: 10;float: left;">نوع ورق : {{ form.mdf_model(size=1, maxlength=128) }}</div> 
   <div style="margin-left: 10;float: left;">pvc : {{ form.pvc }}</div>
   <div style="margin-left: 10;float: left;">شیار : {{ form.shiar }}</div> 
   <div style="margin-left: 10;float: left;">فارسی : {{ form.farsi }}</div><br><br><br><br>
   <div style="margin-left: 10;float: left;">چرخش : {{ form.Charkhesh }}</div>   
-  <div style="margin-left: 10;float: left;">توضیحات : {{ form.about(size=1, maxlength=50) }}</div> 
+  <div style="margin-left: 10;float: left;">توضیحات : {{ form.about(size=1, maxlength=1028) }}</div> 
 
 
   <br><br><br>

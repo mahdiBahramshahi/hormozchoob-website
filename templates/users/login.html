@@ -22,8 +22,8 @@
         {% endif %}
     {% endwith %}
     {{form.hidden_tag()}}
-    آدرس ایمیل : {{form.email }} <br><br>
-    گذرواژه : {{form.password }} <br><br>
+    آدرس ایمیل : {{form.email(size=30, maxlength=128) }} <br><br>
+    گذرواژه : {{form.password(size=30, maxlength=32) }} <br><br>
     <input type="submit" value="ورود">
     <a href="{{url_for('users.register')}}">ثبت نام</a>
 </form>

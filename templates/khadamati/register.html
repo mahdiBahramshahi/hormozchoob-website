@@ -24,7 +24,7 @@
     {% endif %}
     {% endwith %}
     {{ form.hidden_tag()}}
-    نام کاربری:{{ form.username }}  
+    نام کاربری:{{ form.username(size=30, maxlength=32) }}  
     {% if form.username.errors %}
     <ul>
         {% for error in form.username.errors %}
@@ -33,7 +33,7 @@
     </ul>
     {% endif %}
     <br><br>
-    آدرس ایمیل: {{ form.email }}
+    آدرس ایمیل: {{ form.email(size=30, maxlength=128) }}
     {% if form.email.errors %}
     <ul>
         {% for error in form.email.errors %}
@@ -42,7 +42,7 @@
     </ul>
     {% endif %}
     <br><br>
-    گذرواژه: {{ form.password }}
+    گذرواژه: {{ form.password(size=30, maxlength=32) }}
     {% if form.password.errors %}
     <ul>
         {% for error in form.password.errors %}
@@ -51,7 +51,7 @@
     </ul>
     {% endif %}
     <br><br>
-    تکرار گذرواژه: {{ form.confirm_password }}
+    تکرار گذرواژه: {{ form.confirm_password(size=30, maxlength=32)}}
     {% if form.confirm_password.errors %}
     <ul>
         {% for error in form.confirm_password.errors %}
