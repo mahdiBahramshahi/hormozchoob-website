@@ -94,6 +94,7 @@ def create_user():
         new_user.username = form.username.data
         new_user.email = form.email.data
         new_user.set_password(form.password.data)
+        new_user.phone_number = form.phone_number.data
         db.session.add(new_user)
         db.session.commit()
         

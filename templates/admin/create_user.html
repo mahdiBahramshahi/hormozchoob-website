@@ -3,63 +3,74 @@
 
 {% block page_content %}
 
-<form action="{{url_for('admin.create_user')}}" style="background-color:burlywood;" >
-    <center><h1>ساخت کاربر جدید</h1></center>
+<form action="{{url_for('admin.create_user')}}" style="background-color:burlywood;">
+    <center>
+        <h1>ساخت کاربر جدید</h1>
+    </center>
 </form>
 
 <form action="{{url_for('admin.create_user')}}" method="POST" style="background-color:burlywood;">
 
-{% with messages = get_flashed_messages(True) %}
-{% if messages %}
-<div class="row">
-    {% for message in messages %}
-    <div class="card {{message[0]}}">
-        <div class="section">
-            {{ message[1] }}
+    {% with messages = get_flashed_messages(True) %}
+    {% if messages %}
+    <div class="row">
+        {% for message in messages %}
+        <div class="card {{message[0]}}">
+            <div class="section">
+                {{ message[1] }}
+            </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
 
-</div>
-{% endif %}
-{% endwith %}
-{{ form.hidden_tag()}}
-نام کاربری:{{ form.username }}  
-{% if form.username.errors %}
-<ul>
-    {% for error in form.username.errors %}
-    <li style="color: red;"> {{ error }} </li>
-    {% endfor %}
-</ul>
-{% endif %}
-<br><br>
-آدرس ایمیل: {{ form.email }}
-{% if form.email.errors %}
-<ul>
-    {% for error in form.email.errors %}
-    <li style="color: red;"> {{ error }} </li>
-    {% endfor %}
-</ul>
-{% endif %}
-<br><br>
-گذرواژه: {{ form.password }}
-{% if form.password.errors %}
-<ul>
-    {% for error in form.password.errors %}
-    <li style="color: red;"> {{ error }} </li>
-    {% endfor %}
-</ul>
-{% endif %}
-<br><br>
-تکرار گذرواژه: {{ form.confirm_password }}
-{% if form.confirm_password.errors %}
-<ul>
-    {% for error in form.confirm_password.errors %}
-    <li style="color: red;"> {{ error }} </li>
-    {% endfor %}
-</ul>
-{% endif %}
-<br><br>
-<input type="submit" value="ثبت نام">
+    </div>
+    {% endif %}
+    {% endwith %}
+    {{ form.hidden_tag()}}
+    نام کاربری:{{ form.username(size=30, maxlength=20) }}
+    {% if form.username.errors %}
+    <ul>
+        {% for error in form.username.errors %}
+        <li style="color: red;"> {{ error }} </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br><br>
+    آدرس ایمیل: {{ form.email(size=30, maxlength=32) }}
+    {% if form.email.errors %}
+    <ul>
+        {% for error in form.email.errors %}
+        <li style="color: red;"> {{ error }} </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br><br>
+    گذرواژه: {{ form.password(size=30, maxlength=32) }}
+    {% if form.password.errors %}
+    <ul>
+        {% for error in form.password.errors(size=30, maxlength=32) %}
+        <li style="color: red;"> {{ error }} </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br><br>
+    تکرار گذرواژه: {{ form.confirm_password(size=30, maxlength=32) }}
+    {% if form.confirm_password.errors %}
+    <ul>
+        {% for error in form.confirm_password.errors %}
+        <li style="color: red;"> {{ error }} </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br><br>
+    شماره تلفن: {{ form.phone_number(size=30, maxlength=15) }}
+    {% if form.phone_number.errors %}
+    <ul>
+        {% for error in form.phone_number.errors %}
+        <li style="color: red;"> {{ error }} </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br><br>
+    <input type="submit" value="ثبت نام">
 </form>
 {% endblock %}

@@ -10,6 +10,7 @@ class User(db.Model):
     password = Column(String(128),nullable=False,unique=False)
     role = Column(Integer(),nullable=False,default=0)
     username = Column(String(128),nullable=False,unique=True)
+    phone_number = Column(String(18) , nullable=False , unique=False)
 
     def set_password(self,password):
         self.password = generate_password_hash(password)

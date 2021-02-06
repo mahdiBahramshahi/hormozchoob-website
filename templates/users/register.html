@@ -60,6 +60,16 @@
     </ul>
     {% endif %}
     <br><br>
+    
+    شماره تلفن: {{ form.phone_number(size=15, maxlength=128) }}
+    {% if form.phone_number.errors %}
+    <ul>
+        {% for error in form.phone_number.errors %}
+        <li style="color: red;"> {{ error }} </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br><br>
     <input type="submit" value="ثبت نام">
 </form>
 

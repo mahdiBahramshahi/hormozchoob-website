@@ -13,3 +13,4 @@ class RegisterForm(FlaskForm):
     email= EmailField(validators=[DataRequired()])
     password= PasswordField(validators=[DataRequired()])
     confirm_password = PasswordField(validators=[DataRequired()])
+    phone_number = StringField(validators=[DataRequired()])

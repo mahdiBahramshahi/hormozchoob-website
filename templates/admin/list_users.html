@@ -18,6 +18,7 @@
         <th>نام کاربری</th>
         <th>ایمیل</th>
         <th>نقش</th>
+        <th>شماره تلفن</th>
       </tr>
     </thead>
     <tbody>
@@ -27,6 +28,7 @@
           <td data-label="نام کاربری">{{ user.username }}</td>
           <td data-label="ایمیل">{{ user.email }}</td>
           <td data-label="نقش">{{ 'Admin' if user.role else 'User' }}</td>
+          <td data-label="ایمیل">{{ user.phone_number }}</td>
         </tr>
         {% endfor %}
     </tbody>
